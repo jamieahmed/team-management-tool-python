@@ -1,4 +1,4 @@
-## Screenshots
+<!-- ## Screenshots
 
 ## Description:
 
@@ -41,4 +41,4 @@ Developer Chat App is .........
 
 - ![](https://img.shields.io/badge/-Figma-F24E1E?style=flat-square&logo=figma&logoColor=white)
 
-## Next Steps
+## Next Steps -->
