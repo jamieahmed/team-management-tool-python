@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/teams/team-detail.css' %}"
+/>
+{% endblock %} {% block content %}
+
+<section class="cat-container">
+  {% comment %}
+  <div class="cat-img">
+    <img
+      src="https://tse4.mm.bing.net/th?id=OIP.ui0s3WPX338hCynoZqaBzwHaGd&pid=Api&P=0"
+      alt="A skater boy cat"
+    />
+  </div>
+  {% endcomment %}
+  <div class="cat-details">
+    <h2 class="card-title">{{ teams.team }}</h2>
+    <p>{{ teams.code }}</p>
+    <p>{{ teams.purpose }}</p>
+    <p><small>{{ teams.description }}</small></p>
+  </div>
+</section>
+
+{% endblock %}

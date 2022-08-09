@@ -30,9 +30,10 @@ def home(request):
 def about(request):
   return render(request, 'about.html')
 
-# Add new view
 def teams_index(request):
   teams = Team.objects.all()
   return render(request, 'teams/index.html', { 'teams': teams })
 
-  
+def teams_detail(request, team_id):
+  teams = Team.objects.get(id=team_id)
+  return render(request, 'teams/detail.html', { 'teams': teams })
