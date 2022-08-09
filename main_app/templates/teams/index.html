@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/teams/team-index.css' %}"
+/>
+{% endblock %} {% block content %}
+
+<section class="page-header">
+  <h1>Team List</h1>
+</section>
+
+<section class="card-container">
+  {% for team in teams %}
+  <div class="card">
+    <div class="card-content">
+      <div class="card-img-container">
+        <img
+        class="team-list-image"
+          src="https://tse1.mm.bing.net/th?id=OIP.kQqUjXajKTJrN9ziSu9lHgHaHa&pid=Api&P=0"
+          alt="A skater boy cat"
+        />
+      </div>
+      <h2 class="card-title">{{ team.team }}</h2>
+      <p>{{ team.code }}</p>
+      <p>{{ team.purpose }}</p>
+      <p><small>{{ team.description }}</small></p>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+{% endblock %}
