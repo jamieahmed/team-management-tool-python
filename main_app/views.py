@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from main_app.models import Team
 
+from .models import Team
 
 
 # Add the Team class & list and view function below the imports
@@ -24,12 +26,13 @@ teams = [
 def home(request):
   return render(request, 'home.html')
 
-  
+
 def about(request):
   return render(request, 'about.html')
 
 # Add new view
 def teams_index(request):
+  teams = Team.objects.all()
   return render(request, 'teams/index.html', { 'teams': teams })
 
   
