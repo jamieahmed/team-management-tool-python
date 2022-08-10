@@ -1,9 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-
 from main_app.models import Team
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .models import Team
 
 
 # Add the Team class & list and view function below the imports
@@ -37,3 +35,18 @@ def teams_index(request):
 def teams_detail(request, team_id):
   teams = Team.objects.get(id=team_id)
   return render(request, 'teams/detail.html', { 'teams': teams })
+
+
+class TeamCreate(CreateView):
+  model = Team
+  fields = '__all__'
+  success_url = '/teams/'
+
+class TeamUpdate(UpdateView):
+  model = Team
+  # Let's disallow the renaming of a cat by excluding the name field!
+  fields = ['team', 'purpose', 'description', 'code']
+
+class TeamDelete(DeleteView):
+  model = Team
+  success_url = '/teams/'

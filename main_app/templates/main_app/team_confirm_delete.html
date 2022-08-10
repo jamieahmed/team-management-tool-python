@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="page-header">
+  <h1>Delete Cat?</h1>
+  <img
+    src="https://tse2.mm.bing.net/th?id=OIP.xjJ7F4Tdwec-RMhbxpYcAgHaHX&pid=Api&P=0"
+    alt="A cat using a computer"
+  />
+</div>
+<h2>Are you sure you want to delete {{ team.team }}?</h2>
+
+<form action="" method="POST" class="form">
+  {% csrf_token %}
+  <a href="{% url 'teams_detail' team.id %}" class="btn secondary"> Cancel </a>
+  <button type="submit" class="btn danger">Yes - Delete!</button>
+</form>
+
+{% endblock %}

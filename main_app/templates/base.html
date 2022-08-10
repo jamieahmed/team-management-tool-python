@@ -27,8 +27,9 @@
     </div>
     <nav>
       <ul>
-        <li><a href="/teams">All Teams</a></li>
-        <li><a href="/about">About</a></li>
+        <li><a href="{% url 'teams_index' %}">All Teams</a></li>
+        <li><a href="{% url 'teams_create' %}">Add a Team</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
       </ul>
     </nav>
   </header>

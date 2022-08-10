@@ -21,6 +21,10 @@
     <p>{{ teams.purpose }}</p>
     <p><small>{{ teams.description }}</small></p>
   </div>
+  <div class="cat-actions">
+    <a href="{% url 'teams_update' teams.id %}" class="btn warn">Edit</a>
+    <a href="{% url 'teams_delete' teams.id %}" class="btn danger">Delete</a>
+  </div>
 </section>
 
 {% endblock %}
