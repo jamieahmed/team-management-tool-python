@@ -1,18 +1,14 @@
-import django_on_heroku
-django_on_heroku.settings(locals())
+from pathlib import Path
+import os
 
+# import django_on_heroku
 
 
 import environ
 env = environ.Env()
 environ.Env.read_env('SECRET_KEY')
 
-WSGI_APPLICATION = 'teammanagemnettoo.wsgi.application'
-DEBUG_PROPAGATE_EXCEPTIONS = True
 
-
-from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -129,4 +125,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-django_on_heroku.settings(locals())
+
