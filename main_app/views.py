@@ -49,3 +49,4 @@ class TeamUpdate(UpdateView):
 class TeamDelete(DeleteView):
   model = Team
   success_url = '/teams/'
+
