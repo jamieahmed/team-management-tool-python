@@ -25,6 +25,39 @@
     <a href="{% url 'teams_update' teams.id %}" class="btn warn">Edit</a>
     <a href="{% url 'teams_delete' teams.id %}" class="btn danger">Delete</a>
   </div>
+  <hr />
+  <h1>Team Members info </h1>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Role</th>
+          <th>ID</th>
+          <th>Attendance</th>
+          <th>Note</th>
+          <th>Contact Info</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        {% for Employee in team.team_set.all %}
+        <tr>
+          <td>1</td>
+          <td>{{Employee.name}}</td>
+          <td>{{Employee.role}}</td>
+          <td>{{Employee.identification}}</td>
+          <td>{{Employee.attendance}}</td>
+          <td>{{Employee.note}}</td>
+           <td>Details</td>
+          <td>23-12-2022</td> 
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </section>
 
 {% endblock %}

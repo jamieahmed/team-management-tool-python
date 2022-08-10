@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from main_app.models import Team
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
+from .models import Team
 
 
 # Add the Team class & list and view function below the imports
@@ -44,7 +44,6 @@ class TeamCreate(CreateView):
 
 class TeamUpdate(UpdateView):
   model = Team
-  # Let's disallow the renaming of a cat by excluding the name field!
   fields = ['team', 'purpose', 'description', 'code']
 
 class TeamDelete(DeleteView):
