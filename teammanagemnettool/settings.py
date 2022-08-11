@@ -1,14 +1,13 @@
-from pathlib import Path
-import os
-
-# import django_on_heroku
-
+import django_on_heroku
 
 import environ
 env = environ.Env()
-environ.Env.read_env('SECRET_KEY')
+environ.Env.read_env()
 
+WSGI_APPLICATION = 'team-managemnet-tool.wsgi.application'
 
+from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,6 +21,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG') == 'True' 
+DEBUG_PROPAGATE_EXCEPTIONS = True
 
 ALLOWED_HOSTS = []
 
@@ -125,4 +125,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+django_on_heroku.settings(locals())
