@@ -9,10 +9,14 @@
       alt="student"
     />
   </div>
-  <img
-    src="https://tse1.mm.bing.net/th?id=OIP.kQqUjXajKTJrN9ziSu9lHgHaHa&pid=Api&P=0"
-    alt="Text reads: student"
-  />
 </section>
-
-{% endblock %}
+{% if not user.is_authenticated %}
+<section>
+  <form action="{% url 'home' %}" method="post" class="login">
+    <h1>Login</h1>
+    {% csrf_token %} {{ form.as_p }}
+    <input type="hidden" name="next" value="{{ next }}" />
+    <button type="submit" class="btn submit">Login</button>
+  </form>
+</section>
+{% endif %} {% endblock %}

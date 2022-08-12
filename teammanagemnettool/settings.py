@@ -1,13 +1,8 @@
-import django_on_heroku
 
-import environ
-env = environ.Env()
-environ.Env.read_env()
-
-WSGI_APPLICATION = 'team-managemnet-tool.wsgi.application'
 
 from pathlib import Path
 import os
+# import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -17,11 +12,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = 'django-insecure-*mx85!g6z0omtb)j8tm_8u5uhj^7d^@1te%h+57g1yjga$9yoh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG') == 'True' 
-DEBUG_PROPAGATE_EXCEPTIONS = True
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -119,10 +113,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+LOGIN_URL = 'home'
+LOGIN_REDIRECT_URL = 'teams_index'
+LOGOUT_REDIRECT_URL = 'home'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-django_on_heroku.settings(locals())
+# django_heroku.settings(locals())

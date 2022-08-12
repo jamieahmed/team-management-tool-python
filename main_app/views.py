@@ -1,52 +1,61 @@
-from django.shortcuts import render
-from main_app.models import Team
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Team
-
-
-# Add the Team class & list and view function below the imports
-class team:  # Note that parens are optional if not inheriting from another class
-  def __init__(self, team, purpose, description, code):
-    self.team = team
-    self.purpose = purpose
-    self.description = description
-    self.code = code
-
-teams = [
-  team('Lolo', 'tabby', 'Kinda rude.', 3),
-  team('Sachi', 'tortoiseshell', 'Looks like a turtle.', 0),
-  team('Fancy', 'bombay', 'Happy fluff ball.', 4),
-  team('Bonk', 'selkirk rex', 'Meows loudly.', 6)
-]
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Define the home view
-def home(request):
-  return render(request, 'home.html')
+class Home(LoginView):
+  template_name = 'home.html'
 
 
 def about(request):
   return render(request, 'about.html')
 
+@login_required
 def teams_index(request):
-  teams = Team.objects.all()
+  teams = Team.objects.filter(user=request.user)
   return render(request, 'teams/index.html', { 'teams': teams })
 
-def teams_detail(request, team_id):
-  teams = Team.objects.get(id=team_id)
-  return render(request, 'teams/detail.html', { 'teams': teams })
+def team_detail(request, team_id):
+  team = Team.objects.get(id=team_id)
+  return render(request, 'teams/detail.html', { 'team': team })
 
 
-class TeamCreate(CreateView):
+class TeamCreate(LoginRequiredMixin,CreateView):
   model = Team
   fields = '__all__'
   success_url = '/teams/'
+  
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
 
-class TeamUpdate(UpdateView):
+class TeamUpdate(LoginRequiredMixin,UpdateView):
   model = Team
   fields = ['team', 'purpose', 'description', 'code']
 
-class TeamDelete(DeleteView):
+class TeamDelete(LoginRequiredMixin,DeleteView):
   model = Team
   success_url = '/teams/'
 
+
+
+def signup(request):
+  error_message = ''
+  if request.method == 'POST':
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      user = form.save()
+      login(request, user)
+      return redirect('teams_index')
+    else:
+      error_message = 'Invalid sign up - try again'
+  form = UserCreationForm()
+  context = {'form': form, 'error_message': error_message}
+  return render(request, 'signup.html', context)
+ 

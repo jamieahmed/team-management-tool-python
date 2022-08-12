@@ -13,7 +13,7 @@
 <section class="card-container">
   {% for team in teams %}
   <div class="card">
-    <a href="/teams/{{ team.id }}">
+    <a href="{% url 'team_detail' team.id %}">
       <div class="card-content">
         <div class="card-img-container">
           <img

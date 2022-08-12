@@ -1,41 +1,36 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link
-    rel="shortcut icon"
-    type="image/png"
-    href="https://tse1.mm.bing.net/th?id=OIP.nF1HeLPXWbu7VPkCdFruywHaH_&pid=Api&P=0"
-  >
-  <title>Cat Collector</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
-  {% block head %}
-  {% endblock %}
-</head>
-<body>
-  <header>
-    <div class="header-logo-container">
-      <a href="/">
-        {% comment %} <img 
-          src="https://tse2.mm.bing.net/th?id=OIP.xjJ7F4Tdwec-RMhbxpYcAgHaHX&pid=Api&P=0"
-          alt="The Cat Collector Logo"
-        > {% endcomment %}
-      </a>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="{% url 'teams_index' %}">All Teams</a></li>
-        <li><a href="{% url 'teams_create' %}">Add a Team</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    {% block content %}
-    {% endblock %}
-  </main>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="https://tse1.mm.bing.net/th?id=OIP.nF1HeLPXWbu7VPkCdFruywHaH_&pid=Api&P=0"
+    />
+    <title>Team management tool</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
+    {% block head %} {% endblock %}
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'teams_index' %}">All Teams</a></li>
+          <li><a href="{% url 'teams_create' %}">Add a Team</a></li>
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'logout' %}">Log out</a></li>
+          {% else %}
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'home' %}">Login</a></li>
+          <li><a href="{% url 'signup' %}">Sign Up</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
+    <main>{% block content %} {% endblock %}</main>
+  </body>
 </html>
